@@ -1,75 +1,213 @@
-const daten = {
-  "Allgemeine leichte Schmerzen": ["Paracetamol", "Tablette", "500 mg"],
-  "Allgemeine mittlere Schmerzen": ["Novaminsulfon", "Tablette / Intravenös", "500 - 1000 mg"],
-  "Allgemeine starke Schmerzen": ["Morphin", "Intravenös", "5 - 10 ml"],
-  "Angststörung / Depression": ["Duloxalta", "Hartkapseln", "30 - 60 mg"],
-  "Atembeschwerden": ["Salbutamol", "Dosier - Aerosol", "1 - 2 Sprühstöße (100 - 200 µg)"],
-  "Augenrötung": ["Dexapos", "Augentropfen", "3 - 5 Mal täglich 1 Tropfen"],
-  "Bauchschmerzen": ["Carbabeta", "Tablette", "200 mg"],
-  "Blähungen": ["Mebeverin dura", "Filmtablette", "135 mg"],
-  "Infektion (bakteriell)": ["Antibiotika", "Filmtablette", "500 - 1000 mg"],
-  "Blutvergiftung (Sepsis)": ["Ofloxacin", "Filmtablette", "100 / 200 / 400 mg"],
-  "Durchfall": ["Mebeverin dura", "Filmtablette", "135 mg"],
-  "Erbrechen": ["Vomex", "Tablette / Intravenös", "1 - 4 Mal täglich 50 - 400 mg"],
-  "Erektionsstörungen": ["Viagra", "Filmtablette", "1 Mal täglich 1 Tablette (100 mg)"],
-  "Fieber": ["Paracetamol", "Tablette", "500 mg"],
-  "Gelenk- / Muskelschmerzen": ["Diclofenac", "Gel / Retardkapsel", "1 Mal täglich 100 mg"],
-  "Hämatom (Bluterguss / Beule)": ["Voltaren", "Gel", "Nach Bedarf"],
-  "Hypotonie (Niedriger Blutdruck)": ["Gutron", "Tropfen / Tablette", "2-3 mal täglich 7 Tropfen"],
-  "Hypertonie (Hoher Blutdruck)": ["Catapresan", "Tablette", "75 / 100 / 300 mg"],
-  "Halsschmerzen": ["Lemocin", "Lutschpastille", "max 8 Pastillen pro Tag"],
-  "Hustenreiz (trocken)": ["Capval", "Saft", "1 - 3 täglich 10 ml"],
-  "Hustenreit (schleimig)": ["ACC 200", "Brausetablette", "1 - 3 Mal täglich 1 Tablette"],
-  "Infektionen": ["Amoxicillin", "Filmtablette", "1 - 3 Mal täglich 125 mg"],
-  "Juckreiz": ["Fenistil", "Gel", "Nach Bedarf"],
-  "Kopfschmerzen": ["Aspirin", "Tablette", "500 - 1000 mg"],
-  "Krampfanfälle": ["Diazepam", "Tablette", "2 / 5 / 10 mg"],
-  "Schlafstörungen": ["Adumbran", "Tablette", "10 mg"],
-  "Schnupfen": ["Nasic", "Nasenspray", "Nach Bedarf"],
-  "Schürfwunden": ["Bepanthen", "Creme", "Nach Bedarf"],
-  "Schwindel": ["Betahistin", "Tablette", "6 / 12 mg"],
-  "Übelkeit": ["Vomex", "Tablette", "1 - 4 Mal täglich 50 - 400 mg"],
-  "Verbrennung": ["Fenistil", "Gel", "Auf Verbrennung I"],
-  "Verstopfung": ["Movicol", "Pulverbeutel", "1 - 3 Mal täglich 1 Beutel"]
+const patientForm = document.getElementById('patientForm');
+const patientInfo = document.getElementById('patientInfo');
+const downloadSection = document.getElementById('downloadSection');
+const downloadBtn = document.getElementById('downloadBtn');
+
+// Symptom-Daten mit Behandlung
+const symptomsData = {
+    "Allgemeine leichte Schmerzen": {
+        medication: "Paracetamol",
+        form: "Tablette",
+        dosage: "500 mg",
+    },
+    "Allgemeine mittlere Schmerzen": {
+        medication: "Novaminsulfon",
+        form: "Tablette / Intravenös",
+        dosage: "500 - 1000 mg",
+    },
+    "Allgemeine starke Schmerzen": {
+        medication: "Morphin",
+        form: "Intravenös",
+        dosage: "5 - 10 ml",
+    },
+    "Angststörung / Depression": {
+        medication: "Duloxalta",
+        form: "Hartkapseln",
+        dosage: "30 - 60 mg",
+    },
+    "Atembeschwerden": {
+        medication: "Salbutamol",
+        form: "Dosier - Aerosol",
+        dosage: "1 - 2 Sprühstöße (100 - 200 µg)",
+    },
+    "Augenrötung": {
+        medication: "Dexapos",
+        form: "Augentropfen",
+        dosage: "3 - 5 Mal täglich 1 Tropfen",
+    },
+    "Bauchschmerzen": {
+        medication: "Carbabeta",
+        form: "Tablette",
+        dosage: "200 mg",
+    },
+    "Blähungen": {
+        medication: "Mebeverin dura",
+        form: "Filmtablette",
+        dosage: "135 mg",
+    },
+    "Infektion (bakteriell)": {
+        medication: "Antibiotika",
+        form: "Filmtablette",
+        dosage: "500 - 1000 mg",
+    },
+    "Blutvergiftung (Sepsis)": {
+        medication: "Ofloxacin",
+        form: "Filmtablette",
+        dosage: "100 / 200 / 400 mg",
+    },
+    "Durchfall": {
+        medication: "Mebeverin dura",
+        form: "Filmtablette",
+        dosage: "135 mg",
+    },
+    "Erbrechen": {
+        medication: "Vomex",
+        form: "Tablette / Intravenös",
+        dosage: "1 - 4 Mal täglich 50 - 400 mg",
+    },
+    "Erektionsstörungen": {
+        medication: "Viagra",
+        form: "Filmtablette",
+        dosage: "1 Mal täglich 1 Tablette (100 mg)",
+    },
+    "Fieber": {
+        medication: "Paracetamol",
+        form: "Tablette",
+        dosage: "500 mg",
+    },
+    "Gelenk- / Muskelschmerzen": {
+        medication: "Diclofenac",
+        form: "Gel / Retardkapsel",
+        dosage: "1 Mal täglich 100 mg",
+    },
+    "Hämatom (Bluterguss / Beule)": {
+        medication: "Voltaren",
+        form: "Gel",
+        dosage: "Nach Bedarf",
+    },
+    "Hypotonie (Niedriger Blutdruck)": {
+        medication: "Gutron",
+        form: "Tropfen / Tablette",
+        dosage: "2-3 mal täglich 7 Tropfen",
+    },
+    "Hypertonie (Hoher Blutdruck)": {
+        medication: "Catapresan",
+        form: "Tablette",
+        dosage: "75 / 100 / 300 mg",
+    },
+    "Halsschmerzen": {
+        medication: "Lemocin",
+        form: "Lutschpastille",
+        dosage: "max 8 Pastillen pro Tag",
+    },
+    "Hustenreiz (trocken)": {
+        medication: "Capval",
+        form: "Saft",
+        dosage: "1 - 3 täglich 10 ml",
+    },
+    "Hustenreiz (schleimig)": {
+        medication: "ACC 200",
+        form: "Brausetablette",
+        dosage: "1 - 3 Mal täglich 1 Tablette",
+    },
+    "Juckreiz": {
+        medication: "Fenistil",
+        form: "Gel",
+        dosage: "Nach Bedarf",
+    },
+    "Kopfschmerzen": {
+        medication: "Aspirin",
+        form: "Tablette",
+        dosage: "500 - 1000 mg",
+    },
+    "Krampfanfälle": {
+        medication: "Diazepam",
+        form: "Tablette",
+        dosage: "2 / 5 / 10 mg",
+    },
+    "Schlafstörungen": {
+        medication: "Adumbran",
+        form: "Tablette",
+        dosage: "10 mg",
+    },
+    "Schnupfen": {
+        medication: "Nasic",
+        form: "Nasenspray",
+        dosage: "Nach Bedarf",
+    },
+    "Schürfwunden": {
+        medication: "Betaisodona",
+        form: "Salbe",
+        dosage: "Nach Bedarf",
+    },
+    "Schwindel": {
+        medication: "Betahistin",
+        form: "Tablette",
+        dosage: "8 - 16 mg",
+    },
+    "Übelkeit": {
+        medication: "Vomex",
+        form: "Tablette",
+        dosage: "50 - 400 mg",
+    },
+    "Verbrennung": {
+        medication: "Bepanthene",
+        form: "Salbe",
+        dosage: "Nach Bedarf",
+    },
+    "Verstopfung": {
+        medication: "Lactulose",
+        form: "Sirup",
+        dosage: "15 - 30 ml",
+    }
 };
 
-window.onload = function () {
-  const symptomSelect = document.getElementById("symptom");
-  for (let symptom in daten) {
-    let opt = document.createElement("option");
-    opt.value = symptom;
-    opt.innerText = symptom;
-    symptomSelect.appendChild(opt);
-  }
-};
-
-document.getElementById("symptom").addEventListener("change", () => {
-  const symptom = document.getElementById("symptom").value;
-  const behandlung = daten[symptom];
-  const patient = document.getElementById("patient").value;
-  if (symptom && patient) {
-    document.getElementById("behandlung").innerHTML = `
-      <h3>Patientenakte</h3>
-      <strong>Patient:</strong> ${patient}<br>
-      <strong>Symptom:</strong> ${symptom}<br>
-      <strong>Medikament:</strong> ${behandlung[0]}<br>
-      <strong>Darreichungsform:</strong> ${behandlung[1]}<br>
-      <strong>Dosierung:</strong> ${behandlung[2]}
+// Patientenbehandlung anzeigen
+patientForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const patientName = document.getElementById('patientName').value;
+    const patientAddress = document.getElementById('patientAddress').value;
+    const selectedSymptom = document.getElementById('patientSymptom').value;
+    
+    if (!patientName || !patientAddress || !selectedSymptom) {
+        alert('Bitte alle Felder ausfüllen!');
+        return;
+    }
+    
+    const treatment = symptomsData[selectedSymptom];
+    
+    // Patientendaten anzeigen
+    patientInfo.innerHTML = `
+        <h3>Patienteninformation</h3>
+        <p><strong>Name:</strong> ${patientName}</p>
+        <p><strong>Adresse:</strong> ${patientAddress}</p>
+        <p><strong>Symptom:</strong> ${selectedSymptom}</p>
+        <h4>Behandlung:</h4>
+        <p><strong>Medikament:</strong> ${treatment.medication}</p>
+        <p><strong>Form:</strong> ${treatment.form}</p>
+        <p><strong>Dosierung:</strong> ${treatment.dosage}</p>
     `;
-  }
+    
+    // Downloadbereich anzeigen
+    downloadSection.style.display = 'block';
+    
+    // Textdatei zum Download vorbereiten
+    downloadBtn.addEventListener('click', function() {
+        const treatmentText = `Patientenbehandlung:
+Name: ${patientName}
+Adresse: ${patientAddress}
+Symptom: ${selectedSymptom}
+Behandlung:
+Medikament: ${treatment.medication}
+Form: ${treatment.form}
+Dosierung: ${treatment.dosage}`;
+        
+        const blob = new Blob([treatmentText], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${patientName}_Behandlung.txt`;
+        a.click();
+    });
 });
-
-function generateDocument() {
-  const output = document.getElementById("behandlung").innerText;
-  const blob = new Blob([output], { type: "text/plain;charset=utf-8" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "Patientenakte.txt";
-  link.click();
-}
-
-function resetSelection() {
-  document.getElementById("patient").value = "";
-  document.getElementById("symptom").value = "";
-  document.getElementById("behandlung").innerHTML = "";
-}

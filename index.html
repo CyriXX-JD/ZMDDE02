@@ -1,35 +1,73 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Ärztliches Netzwerk</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patientenbehandlung</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Ärztliches Netzwerk</h1>
 
-    <label for="patient">Patient auswählen:</label>
-    <select id="patient">
-      <option value="">-- Bitte wählen --</option>
-      <option value="Max Mustermann">Max Mustermann</option>
-      <option value="Anna Müller">Anna Müller</option>
-      <option value="Lukas Schmitt">Lukas Schmitt</option>
-    </select>
+    <div class="container">
+        <h1>Patientenbehandlung</h1>
 
-    <label for="symptom">Symptom auswählen:</label>
-    <select id="symptom">
-      <option value="">-- Bitte wählen --</option>
-    </select>
+        <!-- Patientenformular -->
+        <form id="patientForm">
+            <label for="patientName">Name des Patienten:</label>
+            <input type="text" id="patientName" name="patientName" required>
 
-    <div class="output" id="behandlung"></div>
+            <label for="patientAddress">Adresse des Patienten:</label>
+            <input type="text" id="patientAddress" name="patientAddress" required>
 
-    <div class="buttons">
-      <button onclick="generateDocument()">Patientenakte erstellen</button>
-      <button onclick="resetSelection()">Zurücksetzen</button>
+            <label for="patientSymptom">Wählen Sie das Symptom:</label>
+            <select id="patientSymptom" name="patientSymptom" required>
+                <option value="">Bitte auswählen</option>
+                <option value="Allgemeine leichte Schmerzen">Allgemeine leichte Schmerzen</option>
+                <option value="Allgemeine mittlere Schmerzen">Allgemeine mittlere Schmerzen</option>
+                <option value="Allgemeine starke Schmerzen">Allgemeine starke Schmerzen</option>
+                <option value="Angststörung / Depression">Angststörung / Depression</option>
+                <option value="Atembeschwerden">Atembeschwerden</option>
+                <option value="Augenrötung">Augenrötung</option>
+                <option value="Bauchschmerzen">Bauchschmerzen</option>
+                <option value="Blähungen">Blähungen</option>
+                <option value="Infektion (bakteriell)">Infektion (bakteriell)</option>
+                <option value="Blutvergiftung (Sepsis)">Blutvergiftung (Sepsis)</option>
+                <option value="Durchfall">Durchfall</option>
+                <option value="Erbrechen">Erbrechen</option>
+                <option value="Erektionsstörungen">Erektionsstörungen</option>
+                <option value="Fieber">Fieber</option>
+                <option value="Gelenk- / Muskelschmerzen">Gelenk- / Muskelschmerzen</option>
+                <option value="Hämatom (Bluterguss / Beule)">Hämatom (Bluterguss / Beule)</option>
+                <option value="Hypotonie (Niedriger Blutdruck)">Hypotonie (Niedriger Blutdruck)</option>
+                <option value="Hypertonie (Hoher Blutdruck)">Hypertonie (Hoher Blutdruck)</option>
+                <option value="Halsschmerzen">Halsschmerzen</option>
+                <option value="Hustenreiz (trocken)">Hustenreiz (trocken)</option>
+                <option value="Hustenreiz (schleimig)">Hustenreiz (schleimig)</option>
+                <option value="Juckreiz">Juckreiz</option>
+                <option value="Kopfschmerzen">Kopfschmerzen</option>
+                <option value="Krampfanfälle">Krampfanfälle</option>
+                <option value="Schlafstörungen">Schlafstörungen</option>
+                <option value="Schnupfen">Schnupfen</option>
+                <option value="Schürfwunden">Schürfwunden</option>
+                <option value="Schwindel">Schwindel</option>
+                <option value="Übelkeit">Übelkeit</option>
+                <option value="Verbrennung">Verbrennung</option>
+                <option value="Verstopfung">Verstopfung</option>
+            </select>
+
+            <button type="submit">Behandlung anzeigen</button>
+        </form>
+
+        <!-- Patienteninfo & Downloadbereich -->
+        <div id="patientInfo"></div>
+
+        <div id="downloadSection" style="display: none;">
+            <button id="downloadBtn">Behandlung als Textdatei herunterladen</button>
+        </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
