@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Ärztliches Netzwerk</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Ärztliches Netzwerk</h1>
+
+    <label for="patient">Patient auswählen:</label>
+    <select id="patient">
+      <option value="">-- Bitte wählen --</option>
+      <option value="Max Mustermann">Max Mustermann</option>
+      <option value="Anna Müller">Anna Müller</option>
+      <option value="Lukas Schmitt">Lukas Schmitt</option>
+    </select>
+
+    <label for="symptom">Symptom auswählen:</label>
+    <select id="symptom">
+      <option value="">-- Bitte wählen --</option>
+    </select>
+
+    <div class="output" id="behandlung"></div>
+
+    <div class="buttons">
+      <button onclick="generateDocument()">Patientenakte erstellen</button>
+      <button onclick="resetSelection()">Zurücksetzen</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
